@@ -1,4 +1,9 @@
 import socket
+import pyfiglet
+import sys
+
+banner = pyfiglet.figlet_format('PORT SCANNER')
+print(banner)
 
 
 def scan_port(host, port):
@@ -16,9 +21,13 @@ if ip_domain == '':
 port1 = int(input('Range port from: ')) 
 port2 = int(input('Range port before: '))
 
-try:
+try:       # translate hostname to IPv4
     host = socket.gethostbyname(ip_domain)
     for i in range(port1, port2 + 1):
         scan_port(host, i)
 except ConnectionError:
     print('There was an error resolving the domain')
+    sys.exit()
+except socket.error:
+    print('Server not responding!')
+    sys.exit()
