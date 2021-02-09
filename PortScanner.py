@@ -24,6 +24,7 @@ port2 = int(input('Range port before: '))
 
 try:       # translate hostname to IPv4
     host = socket.gethostbyname(ip_domain)
+    print(f'Start scan on host {host}')
     for i in range(port1, port2 + 1):
         scan_port(host, i)
 except ConnectionError:
