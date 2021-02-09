@@ -22,7 +22,7 @@ def scan_port(port):
     try:
         client.connect((ip_domain, port))
         with print_lock:
-            print(port, 'is open')
+            print(f'{port} is open')
         client.close()
     except socket.timeout:
         client.close()
