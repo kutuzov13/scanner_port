@@ -1,11 +1,13 @@
 import socket
 
+
 def scan_port(ip, port):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     if client.connect_ex((ip, port)):
         print(f"Port {port} close")
     else:
         print(f"Port {port} open")
+
 
 ip_domain = input('Enter plase you domain(example: google.com): ')
 if ip_domain == '':
