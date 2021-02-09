@@ -14,7 +14,7 @@ def scan_port(host, port):
         print(f"Port {port} open")
 
 
-ip_domain = input('Enter plase you domain(example: google.com): ')
+ip_domain = input('Enter please you domain(example: google.com): ')
 if ip_domain == '':
     print('You must specify a host!')
 
