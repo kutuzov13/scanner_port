@@ -1,6 +1,5 @@
 import socket
 import pyfiglet
-import sys
 import threading
 from queue import Queue
 
@@ -13,8 +12,6 @@ print(banner)
 ip_domain = input('Enter please you host (example: google.com or 192.168.0.1): ')
 if ip_domain == '':
     print('You must specify a host!')
-else:
-    pass
 
 port1 = int(input('Range port from: '))
 port2 = int(input('Range port before: '))
@@ -27,8 +24,10 @@ def scan_port(port):
         with print_lock:
             print(port, 'is open')
         client.close()
-    except Exception:
-        pass
+    except socket.timeout:
+        client.close()
+    except socket.error:
+        client.close()
 
 
 def threader():
@@ -44,7 +43,6 @@ for x in range(100):
     thred = threading.Thread(target=threader, daemon=True)
     thred.start()
 
-
 try:  # translate hostname to IPv4
     host = socket.gethostbyname(ip_domain)
     print(f'Start scan on host {host}')
@@ -54,7 +52,3 @@ try:  # translate hostname to IPv4
     print(f'End scan host {host}')
 except ConnectionError:
     print('There was an error resolving the domain')
-    sys.exit()
-except socket.error:
-    print('Server not responding!')
-    sys.exit()
